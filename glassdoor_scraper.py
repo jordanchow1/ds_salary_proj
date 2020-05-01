@@ -1,15 +1,15 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr 27 19:20:53 2020
+Created on Thu Apr  2 09:32:36 2020
 
-@author: Jordan Chow
+author: Kenarapfaik
+url: https://github.com/arapfaik/scraping-glassdoor-selenium
 """
-
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 from selenium import webdriver
 import time
 import pandas as pd
+
 
 def get_jobs(keyword, num_jobs, verbose, path, slp_time):
     
@@ -24,7 +24,9 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
     #Change the path to where chromedriver is in your home folder.
     driver = webdriver.Chrome(executable_path=path, options=options)
     driver.set_window_size(1120, 1000)
-    url = "http://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="+keyword+"&sc.keyword="+keyword+"&locT=&locId=&jobType="
+    
+    url = "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword="+keyword+"&sc.keyword="+keyword+"&locT=&locId=&jobType="
+    #url = 'https://www.glassdoor.com/Job/jobs.htm?sc.keyword="' + keyword + '"&locT=C&locId=1147401&locKeyword=San%20Francisco,%20CA&jobType=all&fromAge=-1&minSalary=0&includeNoSalaryJobs=true&radius=100&cityId=-1&minRating=0.0&industryId=-1&sgocId=-1&seniorityType=all&companyId=-1&employerSizes=0&applicationType=0&remoteWorkType=0'
     driver.get(url)
     jobs = []
 
@@ -43,8 +45,10 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
         time.sleep(.1)
 
         try:
-            driver.find_element_by_css_selector('[alt="Close"]').click()  #clicking to the X.
+            driver.find_element_by_css_selector('[alt="Close"]').click() #clicking to the X.
+            print(' x out worked')
         except NoSuchElementException:
+            print(' x out failed')
             pass
 
         
@@ -176,7 +180,8 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             "Revenue" : revenue,
             "Competitors" : competitors})
             #add job to jobs
-
+            
+            
         #Clicking on the "next page" button
         try:
             driver.find_element_by_xpath('.//li[@class="next"]//a').click()
