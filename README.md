@@ -1,6 +1,6 @@
 # Glassdoor Salary Analysis
 ### Overview
-Scraped Data Scientist job posting data on Glassdoor using Selenium. Conducted EDA (Exploratory Data Analysis) to observe useful patterns and distributions. Trained models to predict salary.
+Scraped Data Scientist job postings on Glassdoor using Selenium. Conducted EDA (Exploratory Data Analysis) to observe useful patterns and distributions. Trained models to predict salary.
 
 ## Resources
 **Scraper Github:** https://github.com/arapfaik/scraping-glassdoor-selenium  
